@@ -21,6 +21,7 @@ venv/
 env/
 /venv/
 /env/
+.venv/
 
 # Archivos específicos de Django
 *.log
