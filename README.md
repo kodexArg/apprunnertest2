@@ -23,7 +23,6 @@ Este proyecto utiliza **exclusivamente AWS App Runner** con código fuente (sin 
 ├── .venv/                       # Entorno virtual Python (desarrollo local)
 ├── apprunner.yaml              # Configuración de AWS App Runner (REQUERIDO)
 ├── requirements.txt            # Dependencias de Python (uv)
-├── pyproject.toml              # Configuración de Poetry (respaldo)
 ├── Pipfile                     # Configuración de Pipenv (respaldo)
 ├── app.py                     # Aplicación Flask de ejemplo
 └── README.md
@@ -48,14 +47,10 @@ Este proyecto utiliza **exclusivamente AWS App Runner** con código fuente (sin 
      runtime-version: 3.11
      pre-run:
        - pip3 install uv
-       - export PATH="/opt/venv/bin:$PATH"
-     command: python app.py
+     command: /opt/venv/bin/python app.py
      network:
        port: 8080
        env: PORT
-     env:
-       - name: PATH
-         value: "/opt/venv/bin:$PATH"
    ```
 
 ### 📋 Reglas del Proyecto

@@ -12,11 +12,7 @@ run:
   runtime-version: 3.11
   pre-run:
     - pip3 install uv
-    - export PATH="/opt/venv/bin:$PATH"
-  command: python app.py
+  command: /opt/venv/bin/python app.py
   network:
     port: 8080
     env: PORT
-  env:
-    - name: PATH
-      value: "/opt/venv/bin:$PATH"
