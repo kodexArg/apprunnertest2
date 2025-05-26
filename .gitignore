@@ -37,7 +37,6 @@ db.sqlite3
 .env
 *.ini
 *.json
-*.yaml
 *.yml
 
 # Archivos de IDE y sistema
