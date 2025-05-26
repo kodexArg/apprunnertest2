@@ -42,7 +42,7 @@ Este proyecto utiliza **exclusivamente AWS App Runner** con código fuente (sin 
        build:
          - pip3 install uv
          - uv venv /opt/venv
-         - uv pip install -r requirements.txt
+         - uv pip install --python /opt/venv/bin/python -r requirements.txt
    run:
      runtime-version: 3.11
      pre-run:
