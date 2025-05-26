@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "apprunnertest2"
+version = "0.1.0"
+description = "AWS App Runner test project with Flask"
+author = "kodexArg"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+flask = "==2.3.3"
+gunicorn = "==21.2.0"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.0.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+ 
