@@ -4,14 +4,16 @@ runtime: python311
 build:
   commands:
     build:
-      - pip3 install --user -r requirements.txt
+      - pip3 install -r requirements.txt
   env:
     - name: BUILD_ENV
       value: "production"
 
 run:
   runtime-version: 3.11
-  command: python3 app.py
+  pre-run:
+    - pip3 install -r requirements.txt
+  command: gunicorn --bind 0.0.0.0:$PORT --workers 1 app:app
   network:
     port: 8080
     env: PORT
@@ -19,4 +21,4 @@ run:
     - name: ENVIRONMENT
       value: "production"
     - name: DEBUG
-      value: "false"
+      value: "false" 

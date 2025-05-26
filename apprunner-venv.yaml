@@ -4,14 +4,15 @@ runtime: python311
 build:
   commands:
     build:
-      - pip3 install --user -r requirements.txt
+      - python3 -m venv /opt/venv
+      - /opt/venv/bin/pip install -r requirements.txt
   env:
     - name: BUILD_ENV
       value: "production"
 
 run:
   runtime-version: 3.11
-  command: python3 app.py
+  command: /opt/venv/bin/python app.py
   network:
     port: 8080
     env: PORT
@@ -19,4 +20,4 @@ run:
     - name: ENVIRONMENT
       value: "production"
     - name: DEBUG
-      value: "false"
+      value: "false" 

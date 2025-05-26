@@ -4,7 +4,8 @@ runtime: python311
 build:
   commands:
     build:
-      - pip3 install --user -r requirements.txt
+      - mkdir -p /opt/python-packages
+      - pip3 install --target /opt/python-packages -r requirements.txt
   env:
     - name: BUILD_ENV
       value: "production"
@@ -20,3 +21,5 @@ run:
       value: "production"
     - name: DEBUG
       value: "false"
+    - name: PYTHONPATH
+      value: "/opt/python-packages" 
