@@ -41,13 +41,13 @@ Este proyecto utiliza **exclusivamente AWS App Runner** con código fuente (sin 
      commands:
        build:
          - pip3 install uv
-         - uv venv /opt/venv
-         - uv pip install --python /opt/venv/bin/python -r requirements.txt
+         - uv venv .venv
+         - uv pip install -r requirements.txt
    run:
      runtime-version: 3.11
      pre-run:
        - pip3 install uv
-     command: /opt/venv/bin/python app.py
+     command: .venv/bin/python app.py
      network:
        port: 8080
        env: PORT
