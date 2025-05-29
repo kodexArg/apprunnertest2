@@ -21,10 +21,22 @@ Este proyecto utiliza **exclusivamente AWS App Runner** con código fuente (sin 
 ```
 .
 ├── .venv/                       # Entorno virtual Python (desarrollo local)
-├── apprunner.yaml              # Configuración de AWS App Runner (REQUERIDO)
-├── requirements.txt            # Dependencias de Python (uv)
-├── Pipfile                     # Configuración de Pipenv (respaldo)
-├── app.py                     # Aplicación Flask de ejemplo
+├── apprunner.yaml               # Configuración de AWS App Runner (REQUERIDO)
+├── requirements.txt             # Dependencias de Python (Django)
+├── manage.py                    # Script principal de Django
+├── project/                     # Proyecto Django
+│   ├── __init__.py
+│   ├── settings.py
+│   ├── urls.py
+│   └── wsgi.py
+├── core/                        # App principal de Django
+│   ├── __init__.py
+│   ├── admin.py
+│   ├── apps.py
+│   ├── models.py
+│   ├── tests.py
+│   ├── urls.py
+│   └── views.py
 └── README.md
 ```
 
@@ -32,8 +44,8 @@ Este proyecto utiliza **exclusivamente AWS App Runner** con código fuente (sin 
 
 1. El archivo `apprunner.yaml` contiene toda la configuración necesaria
 2. App Runner construye automáticamente usando Python 3.11
-3. La aplicación se ejecuta en el puerto 8080 (variable `PORT`)
-4. Configuración actual (MVP + uv):
+3. La aplicación se ejecuta en el puerto 8080
+4. Configuración actual:
    ```yaml
    version: 1.0
    runtime: python311
@@ -47,10 +59,9 @@ Este proyecto utiliza **exclusivamente AWS App Runner** con código fuente (sin 
      runtime-version: 3.11
      pre-run:
        - pip3 install uv
-     command: .venv/bin/gunicorn -b 0.0.0.0:$PORT app:app
+     command: .venv/bin/gunicorn -b 0.0.0.0:8080 project.wsgi
      network:
        port: 8080
-       env: PORT
    ```
 
 ### 📋 Reglas del Proyecto

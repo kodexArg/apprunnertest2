@@ -58,8 +58,8 @@ deactivate -nondestructive
 $VIRTUAL_ENV = $BASE_DIR
 $env:VIRTUAL_ENV = $VIRTUAL_ENV
 
-if ("apprunnertest2" -ne "") {
-    $env:VIRTUAL_ENV_PROMPT = "apprunnertest2"
+if ("" -ne "") {
+    $env:VIRTUAL_ENV_PROMPT = ""
 }
 else {
     $env:VIRTUAL_ENV_PROMPT = $( Split-Path $env:VIRTUAL_ENV -Leaf )
