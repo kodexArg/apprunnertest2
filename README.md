@@ -47,7 +47,7 @@ Este proyecto utiliza **exclusivamente AWS App Runner** con código fuente (sin 
      runtime-version: 3.11
      pre-run:
        - pip3 install uv
-     command: .venv/bin/python app.py
+     command: .venv/bin/gunicorn -b 0.0.0.0:$PORT app:app
      network:
        port: 8080
        env: PORT
