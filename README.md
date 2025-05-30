@@ -1,87 +1,54 @@
-## AppRunner Test (2)
+# AppRunner Test 2
 
-Proyecto de prueba de AWS App Runner sin Docker - Configuración basada en código fuente
+Prueba de despliegue en AWS App Runner (sin Docker)
 
-**Repositorio**: https://github.com/kodexArg/apprunnertest2/
+**Repositorio:** https://github.com/kodexArg/apprunnertest2/
 
-### ⚙️ Configuración
+## ⚙️ Configuración
 
-Este proyecto utiliza **exclusivamente AWS App Runner** con código fuente (sin Docker).
+- Despliegue exclusivo en AWS App Runner (runtime administrado Python 3.11)
+- Configuración principal: `apprunner.yaml`
+- Sin Docker, ECS, Fargate ni EC2
 
-**Archivo principal de configuración**: `apprunner.yaml`
-
-### 💻 Entorno de Desarrollo
-
-- **OS**: Windows
-- **Shell**: PowerShell 7+
-- **Python**: Virtual environment en `.venv/` (activo)
-
-### 📁 Estructura del Proyecto
+## 📁 Estructura del Proyecto
 
 ```
-.
-├── .venv/                       # Entorno virtual Python (desarrollo local)
-├── apprunner.yaml               # Configuración de AWS App Runner (REQUERIDO)
-├── requirements.txt             # Dependencias de Python (Django)
-├── manage.py                    # Script principal de Django
-├── project/                     # Proyecto Django
-│   ├── __init__.py
-│   ├── settings.py
-│   ├── urls.py
-│   └── wsgi.py
-├── core/                        # App principal de Django
-│   ├── __init__.py
-│   ├── admin.py
-│   ├── apps.py
-│   ├── models.py
-│   ├── tests.py
-│   ├── urls.py
-│   └── views.py
+├── apprunner.yaml         # Configuración App Runner
+├── requirements.txt       # Dependencias Python
+├── manage.py              # Django
+├── project/               # Proyecto Django
+├── core/                  # App principal
 └── README.md
 ```
 
-### 🚀 Despliegue
+## 🚀 Despliegue en App Runner
 
-1. El archivo `apprunner.yaml` contiene toda la configuración necesaria
-2. App Runner construye automáticamente usando Python 3.11
-3. La aplicación se ejecuta en el puerto 8080
-4. Configuración actual:
-   ```yaml
-   version: 1.0
-   runtime: python311
-   build:
-     commands:
-       build:
-         - pip3 install uv
-         - uv venv .venv
-         - uv pip install -r requirements.txt
-   run:
-     runtime-version: 3.11
-     pre-run:
-       - pip3 install uv
-     command: gunicorn -b 0.0.0.0:8080 project.wsgi
-     network:
-       port: 8080
-   ```
+- App Runner construye y ejecuta usando Python 3.11
+- La app escucha en `0.0.0.0:$PORT` (por defecto: 8080)
+- Ejemplo de configuración:
 
-5. Asegúrate de que `gunicorn` está en `requirements.txt`:
-   ```
-   gunicorn
-   ```
+```yaml
+version: 1.0
+runtime: python311
+build:
+  commands:
+    build:
+      - pip3 install -r requirements.txt
+run:
+  runtime-version: 3.11
+  command: gunicorn -b 0.0.0.0:8080 project.wsgi
+  network:
+    port: 8080
+```
 
-### 📋 Reglas del Proyecto
+- `gunicorn` debe estar en `requirements.txt`
 
-- ✅ **SÍ**: Usar y modificar `apprunner.yaml`
-- ✅ **SÍ**: Managed runtimes de App Runner
-- ✅ **SÍ**: Despliegue desde código fuente
-- ❌ **NO**: Docker, Dockerfile, ECS, Fargate
-- ❌ **NO**: Imágenes de contenedor
+## ✅ Estado
 
-### 📚 Documentación
+- Versión funcional: successfully deployed to apprunnertest2
+- Tag: `funcional` en el repositorio
 
-Basado en la documentación oficial: https://docs.aws.amazon.com/apprunner/latest/dg/config-file-ref.html
+## 📚 Documentación
 
-### 🔗 Enlaces
-
-- **GitHub**: https://github.com/kodexArg/apprunnertest2/
-- **Usuario**: kodexArg
+- [Referencia App Runner config](https://docs.aws.amazon.com/apprunner/latest/dg/config-file-ref.html)
+- [Repositorio GitHub](https://github.com/kodexArg/apprunnertest2/)
