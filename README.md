@@ -41,14 +41,29 @@ run:
     port: 8080
 ```
 
-- `gunicorn` debe estar en `requirements.txt`
+- `gunicorn` y `boto3` deben estar en `requirements.txt`
+
+## 🔐 Uso de Secrets Manager (PING)
+
+La aplicación utiliza un secret de AWS Secrets Manager llamado `PING` (ARN configurado en `apprunner.yaml`). El valor de este secret se muestra en la página principal junto al mensaje Hello World.
+
+Ejemplo de configuración en `apprunner.yaml`:
+
+```yaml
+run:
+  # ...
+  secrets:
+    - name: PING
+      value-from: "arn:aws:secretsmanager:us-east-1:789650504128:secret:pingping/secret-VcQsw5"
+```
+
+En la vista principal se mostrará:
+
+```
+Hello World - PING: PONG
+```
 
 ## ✅ Estado
 
 - Versión funcional: successfully deployed to apprunnertest2
-- Tag: `funcional` en el repositorio
-
-## 📚 Documentación
-
-- [Referencia App Runner config](https://docs.aws.amazon.com/apprunner/latest/dg/config-file-ref.html)
-- [Repositorio GitHub](https://github.com/kodexArg/apprunnertest2/)
+- Tag: `
