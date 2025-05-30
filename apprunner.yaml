@@ -8,17 +8,19 @@ build:
       - uv venv .venv
       - uv pip install -r requirements.txt
 
+
 run:
   runtime-version: 3.11
   pre-run:
     - pip3 install uv
   command: gunicorn -b 0.0.0.0:8080 project.wsgi
+  network:
+    port: 8080
+    env: PORT
   env:
     - name: SECRET_KEY
       value: "django-insecure-o!^byl*kw0@-xqlew7dnknir35^0*)r2e3vlhdjf$9_u63_1=^"
     - name: ALLOWED_HOSTS
       value: "*"
     - name: DEBUG
-      value: "True"
-  network:
-    port: 8080
+      value: "False"
