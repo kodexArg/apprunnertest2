@@ -12,7 +12,7 @@ run:
   runtime-version: 3.11
   pre-run:
     - pip3 install uv
-  command: .venv/bin/gunicorn -b 0.0.0.0:8080 project.wsgi
+  command: gunicorn -b 0.0.0.0:8080 project.wsgi
   env:
     - name: SECRET_KEY
       value: "django-insecure-o!^byl*kw0@-xqlew7dnknir35^0*)r2e3vlhdjf$9_u63_1=^"

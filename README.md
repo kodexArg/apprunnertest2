@@ -59,9 +59,14 @@ Este proyecto utiliza **exclusivamente AWS App Runner** con código fuente (sin 
      runtime-version: 3.11
      pre-run:
        - pip3 install uv
-     command: .venv/bin/gunicorn -b 0.0.0.0:8080 project.wsgi
+     command: gunicorn -b 0.0.0.0:8080 project.wsgi
      network:
        port: 8080
+   ```
+
+5. Asegúrate de que `gunicorn` está en `requirements.txt`:
+   ```
+   gunicorn
    ```
 
 ### 📋 Reglas del Proyecto
