@@ -26,4 +26,4 @@ run:
       value: "False"
   secrets:
     - name: PING
-      value-from: "arn:aws:secretsmanager:us-east-1:789650504128:secret:pingping/secret-VcQsw5"
+      value-from: "arn:aws:secretsmanager:us-east-1:789650504128:secret:pingping/secret-VcQsw5::"
