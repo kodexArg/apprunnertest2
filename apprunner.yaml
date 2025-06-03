@@ -17,12 +17,22 @@ run:
     port: 8080
     env: PORT
   env:
-    - name: SECRET_KEY
-      value: "django-insecure-o!^byl*kw0@-xqlew7dnknir35^0*)r2e3vlhdjf$9_u63_1=^"
     - name: ALLOWED_HOSTS
       value: "*"
     - name: DEBUG
       value: "False"
+    - name: DB_HOST
+      value: "virginia-db.cccpxuiv6n1v.us-east-1.rds.amazonaws.com"
+    - name: DB_PORT
+      value: "5432"
+    - name: DB_NAME
+      value: "djdb"
   secrets:
     - name: PING
       value-from: "arn:aws:secretsmanager:us-east-1:789650504128:secret:pingping/secret-VcQsw5"
+    - name: DB_USERNAME
+      value-from: "arn:aws:secretsmanager:us-east-1:789650504128:secret:rds!db-b2e1ff83-1545-4806-bd37-df9fd2a3de95:username::"
+    - name: DB_PASSWORD
+      value-from: "arn:aws:secretsmanager:us-east-1:789650504128:secret:rds!db-b2e1ff83-1545-4806-bd37-df9fd2a3de95:password::"
+    - name: SECRET_KEY
+      value-from: "arn:aws:secretsmanager:us-east-1:789650504128:secret:django-secret-3cNpZN:SECRET_KEY::"
