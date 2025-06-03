@@ -8,7 +8,6 @@ build:
       - uv venv .venv
       - uv pip install -r requirements.txt
 
-
 run:
   runtime-version: 3.11
   pre-run:
@@ -24,3 +23,6 @@ run:
       value: "*"
     - name: DEBUG
       value: "False"
+  secrets:
+    - name: PING
+      value-from: "arn:aws:secretsmanager:us-east-1:789650504128:secret:pingping/secret-VcQsw5::"
