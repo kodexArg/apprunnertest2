@@ -8,6 +8,7 @@ class CoreConfig(AppConfig):
     name = 'core'
 
     def ready(self):
+        # Import User model here to avoid AppRegistryNotReady error
         from django.contrib.auth.models import User
         
         if not User.objects.filter(username='admin').exists():
