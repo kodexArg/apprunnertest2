@@ -14,6 +14,7 @@ run:
     - pip3 install uv
     - .venv/bin/python manage.py makemigrations
     - .venv/bin/python manage.py migrate
+    - .venv/bin/python manage.py createsuperuser --noinput
   command: .venv/bin/gunicorn -b 0.0.0.0:8080 project.wsgi
   network:
     port: 8080
@@ -30,11 +31,17 @@ run:
     - name: DB_NAME
       value: "djdb"
   secrets:
-    - name: PING
-      value-from: "arn:aws:secretsmanager:us-east-1:789650504128:secret:pingping/secret-VcQsw5"
+    - name: DJANGO_SUPERUSER_USERNAME
+      value-from: "arn:aws:secretsmanager:us-east-1:789650504128:secret:django-secret-3cNpZN:DJANGO_SUPERUSER_USERNAME::"
+    - name: DJANGO_SUPERUSER_EMAIL
+      value-from: "arn:aws:secretsmanager:us-east-1:789650504128:secret:django-secret-3cNpZN:DJANGO_SUPERUSER_EMAIL::"
+    - name: DJANGO_SUPERUSER_PASSWORD
+      value-from: "arn:aws:secretsmanager:us-east-1:789650504128:secret:django-secret-3cNpZN:DJANGO_SUPERUSER_PASSWORD::"
+    - name: SECRET_KEY
+      value-from: "arn:aws:secretsmanager:us-east-1:789650504128:secret:django-secret-3cNpZN:SECRET_KEY::"
     - name: DB_USERNAME
       value-from: "arn:aws:secretsmanager:us-east-1:789650504128:secret:rds!db-b2e1ff83-1545-4806-bd37-df9fd2a3de95:username::"
     - name: DB_PASSWORD
       value-from: "arn:aws:secretsmanager:us-east-1:789650504128:secret:rds!db-b2e1ff83-1545-4806-bd37-df9fd2a3de95:password::"
-    - name: SECRET_KEY
-      value-from: "arn:aws:secretsmanager:us-east-1:789650504128:secret:django-secret-3cNpZN:SECRET_KEY::"
+    - name: PING
+      value-from: "arn:aws:secretsmanager:us-east-1:789650504128:secret:pingping/secret-VcQsw5"
