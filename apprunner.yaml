@@ -12,13 +12,15 @@ run:
   runtime-version: 3.11
   pre-run:
     - pip3 install uv
+    - .venv/bin/python manage.py makemigrations
+    - .venv/bin/python manage.py migrate
   command: .venv/bin/gunicorn -b 0.0.0.0:8080 project.wsgi
   network:
     port: 8080
     env: PORT
   env:
     - name: ALLOWED_HOSTS
-      value: "*"
+      value: "*,*.amazonaws.com,*.apprunner.aws"
     - name: DEBUG
       value: "False"
     - name: DB_HOST
