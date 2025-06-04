@@ -6,3 +6,4 @@ tzdata
 gunicorn
 boto3
 psycopg2-binary
+django-storages

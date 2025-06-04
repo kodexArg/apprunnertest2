@@ -18,13 +18,17 @@ run:
     - name: ALLOWED_HOSTS
       value: "*,*.amazonaws.com,*.apprunner.aws"
     - name: DEBUG
-      value: "False"
+      value: "True" #atención con esto!
     - name: DB_HOST
       value: "database-free-tier.cccpxuiv6n1v.us-east-1.rds.amazonaws.com"
     - name: DB_PORT
       value: "5432"
     - name: DB_NAME
       value: "djdb"
+    - name: AWS_STORAGE_BUCKET_NAME
+      value: "alvs-virginia-s3"
+    - name: AWS_S3_REGION_NAME
+      value: "us-east-1"
   secrets:
     - name: DJANGO_SUPERUSER_USERNAME
       value-from: "arn:aws:secretsmanager:us-east-1:789650504128:secret:django-secret-3cNpZN:DJANGO_SUPERUSER_USERNAME::"

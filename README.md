@@ -20,6 +20,7 @@ Proyecto de pruebas para AWS App Runner con Python 3.11 (sin Docker/ECS).
 
 - Usando runtime administrado de Python 3.11
 - Configuración en `apprunner.yaml`
+  - DEBUG=True, cuidado!
 - No se requiere Docker/ECS/Fargate
 - Secrets Manager configurado y funcionando
 - Variables de entorno establecidas
