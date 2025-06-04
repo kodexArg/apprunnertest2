@@ -21,7 +21,7 @@ run:
     - name: DEBUG
       value: "False"
     - name: DB_HOST
-      value: "virginia-db.cccpxuiv6n1v.us-east-1.rds.amazonaws.com"
+      value: "database-free-tier.cccpxuiv6n1v.us-east-1.rds.amazonaws.com"
     - name: DB_PORT
       value: "5432"
     - name: DB_NAME
