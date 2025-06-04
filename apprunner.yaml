@@ -10,13 +10,7 @@ build:
 
 run:
   runtime-version: 3.11
-  pre-run:
-    - pip3 install uv
-    - 'echo "DEBUG: SECRET_KEY is set to: ${SECRET_KEY}"' 
-    - .venv/bin/python manage.py makemigrations
-    - .venv/bin/python manage.py migrate
-    - .venv/bin/python manage.py createsuperuser --noinput
-  command: .venv/bin/gunicorn -b 0.0.0.0:8080 project.wsgi
+  command: ./scripts/start.sh
   network:
     port: 8080
     env: PORT
