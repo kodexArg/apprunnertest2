@@ -1,5 +1,4 @@
 from django.apps import AppConfig
-from django.contrib.auth.models import User
 from django.conf import settings
 import os
 
@@ -9,6 +8,8 @@ class CoreConfig(AppConfig):
     name = 'core'
 
     def ready(self):
+        from django.contrib.auth.models import User
+        
         if not User.objects.filter(username='admin').exists():
             # Obtener credenciales de la base de datos
             db_user = settings.DATABASES['default']['USER']
