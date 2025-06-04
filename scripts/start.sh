@@ -13,5 +13,9 @@ else
     echo "Superuser already exists, skipping creation."
 fi
 
+# Collect static files
+echo "Collecting static files..."
+.venv/bin/python manage.py collectstatic --noinput
+
 # Start Gunicorn
 exec .venv/bin/gunicorn -b 0.0.0.0:8080 project.wsgi 
