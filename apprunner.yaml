@@ -7,10 +7,11 @@ build:
       - pip3 install uv
       - uv venv .venv
       - uv pip install -r requirements.txt
+      - chmod +x scripts/start.sh
 
 run:
   runtime-version: 3.11
-  command: ./scripts/start.sh
+  command: bash scripts/start.sh
   network:
     port: 8080
     env: PORT
