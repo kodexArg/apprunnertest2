@@ -13,6 +13,7 @@ ALLOWED_HOSTS = os.environ['ALLOWED_HOSTS'].split(',')
 CSRF_TRUSTED_ORIGINS = [  # Dominios permitidos para peticiones POST con CSRF token
     'https://*.amazonaws.com',
     'https://*.apprunner.aws',
+    'https://*.awsapprunner.com',
     'http://localhost:8080',
     'http://127.0.0.1:8080'
 ]
@@ -25,13 +26,13 @@ CSRF_USE_SESSIONS = True  # Almacena token CSRF en sesión en lugar de cookie
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')  # Detecta HTTPS detrás del proxy de App Runner
 
 INSTALLED_APPS = [
-    'core',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'core',
 ]
 
 MIDDLEWARE = [
