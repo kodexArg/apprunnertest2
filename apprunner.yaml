@@ -29,6 +29,10 @@ run:
       value: "alvs-virginia-s3"
     - name: AWS_S3_REGION_NAME
       value: "us-east-1"
+    - name: AWS_S3_CUSTOM_DOMAIN
+      value: "d2g4tf0q5e3v42.cloudfront.net"
+    - name: AWS_S3_OBJECT_PARAMETERS
+      value: '{"CacheControl": "max-age=86400"}'
   secrets:
     - name: DJANGO_SUPERUSER_USERNAME
       value-from: "arn:aws:secretsmanager:us-east-1:789650504128:secret:django-secret-3cNpZN:DJANGO_SUPERUSER_USERNAME::"

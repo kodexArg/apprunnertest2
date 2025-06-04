@@ -13,6 +13,7 @@ Proyecto de pruebas para AWS App Runner con Python 3.11 (sin Docker/ECS).
 - [x] Integración con Secrets Manager (PING test)
 - [x] Integración con RDS
 - [ ] Integración con S3
+  - [ ] CloudFront
 - [ ] Pruebas escrituras S3
 
 

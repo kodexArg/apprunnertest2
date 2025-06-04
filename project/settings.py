@@ -107,8 +107,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AWS_STORAGE_BUCKET_NAME = os.environ['AWS_STORAGE_BUCKET_NAME']
 AWS_S3_REGION_NAME = os.environ['AWS_S3_REGION_NAME']
 AWS_S3_FILE_OVERWRITE = False
-AWS_DEFAULT_ACL = None
-AWS_QUERYSTRING_AUTH = False  # Mejora de seguridad: no expone credenciales en URLs
+AWS_DEFAULT_ACL = 'public-read'
+AWS_QUERYSTRING_AUTH = False
+AWS_S3_CUSTOM_DOMAIN = os.environ.get('AWS_S3_CUSTOM_DOMAIN')
+AWS_S3_OBJECT_PARAMETERS = json.loads(os.environ.get('AWS_S3_OBJECT_PARAMETERS', '{"CacheControl": "max-age=86400"}'))
+AWS_S3_SIGNATURE_VERSION = 's3v4'
+AWS_S3_VERIFY = True
 
 STORAGES = {
     "default": {
@@ -117,17 +121,25 @@ STORAGES = {
             "bucket_name": AWS_STORAGE_BUCKET_NAME,
             "region_name": AWS_S3_REGION_NAME,
             "querystring_auth": AWS_QUERYSTRING_AUTH,
+            "custom_domain": AWS_S3_CUSTOM_DOMAIN,
+            "object_parameters": AWS_S3_OBJECT_PARAMETERS,
+            "signature_version": AWS_S3_SIGNATURE_VERSION,
+            "verify": AWS_S3_VERIFY,
         },
     },
     "staticfiles": {
         "BACKEND": "storages.backends.s3.S3Storage",
         "OPTIONS": {
             "bucket_name": AWS_STORAGE_BUCKET_NAME,
-            "location": "static", 
+            "location": "static",
             "querystring_auth": AWS_QUERYSTRING_AUTH,
+            "custom_domain": AWS_S3_CUSTOM_DOMAIN,
+            "object_parameters": AWS_S3_OBJECT_PARAMETERS,
+            "signature_version": AWS_S3_SIGNATURE_VERSION,
+            "verify": AWS_S3_VERIFY,
         },
     },
 }
 
-STATIC_URL = '/static/'
-MEDIA_URL = '/media/'
+STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/static/'
+MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/media/'
