@@ -50,12 +50,21 @@ fi
 echo "Integration tests passed."
 
 echo "4. Running application tests..."
-.venv/bin/python manage.py test core.tests --verbosity 2
+echo "4.1. Running core.views tests..."
+.venv/bin/python manage.py test core.tests.test_views --verbosity 2
 if [ $? -ne 0 ]; then
-    echo "Application tests failed. Aborting deployment."
+    echo "core.views tests failed. Aborting deployment."
     exit 1
 fi
-echo "All tests passed successfully."
+
+echo "4.2. Running core.models tests..."
+.venv/bin/python manage.py test core.tests.test_models --verbosity 2
+if [ $? -ne 0 ]; then
+    echo "core.models tests failed. Aborting deployment."
+    exit 1
+fi
+
+echo "All application tests passed successfully."
 
 echo "Starting Gunicorn server..."
 exec .venv/bin/gunicorn -b 0.0.0.0:8080 project.wsgi --log-level info --access-logfile - --error-logfile - 
