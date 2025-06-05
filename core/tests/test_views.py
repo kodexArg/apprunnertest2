@@ -3,6 +3,7 @@ from django.urls import reverse
 from loguru import logger
 import sys
 import os
+from unittest.mock import patch
 
 logger.remove()
 logger.add(
@@ -42,10 +43,11 @@ class CoreViewsTests(TestCase):
     def test_db_health_check_failure(self):
         """Verify that the database health check endpoint returns 500 when database is inaccessible."""
         logger.info("Testing db_health_check endpoint with connection failure")
-        os.environ['DB_HOST'] = 'invalid_host'
-        response = self.client.get(reverse('db_health_check'))
-        self.assertEqual(response.status_code, 500)
-        self.assertIn('failed', response.content.decode().lower())
+        with patch('django.db.connection.cursor') as mock_cursor:
+            mock_cursor.side_effect = Exception("Simulated DB failure")
+            response = self.client.get(reverse('db_health_check'))
+            self.assertEqual(response.status_code, 500)
+            self.assertIn('failed', response.content.decode().lower())
         logger.info("db_health_check endpoint failure test completed")
 
     def tearDown(self):
