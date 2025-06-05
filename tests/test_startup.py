@@ -44,23 +44,37 @@ class IntegrationTests(TestCase):
     def test_environment_configuration(self):
         """Verify that all required environment variables are properly configured."""
         logger.info("Verifying environment configuration")
-        required_vars = [
-            'DB_HOST',
-            'DB_PORT',
-            'DB_NAME',
+        
+        # Check database configuration
+        self.assertTrue(hasattr(settings, 'DATABASES'))
+        self.assertIn('default', settings.DATABASES)
+        
+        db_config = settings.DATABASES['default']
+        required_db_vars = {
+            'DB_HOST': 'HOST',
+            'DB_PORT': 'PORT',
+            'DB_NAME': 'NAME',
+        }
+        
+        for env_var, db_setting in required_db_vars.items():
+            self.assertIn(db_setting, db_config, f"Database setting {db_setting} is not configured")
+            self.assertTrue(db_config[db_setting], f"Database setting {db_setting} is empty")
+        
+        # Check AWS configuration
+        required_aws_vars = [
             'AWS_STORAGE_BUCKET_NAME',
             'AWS_S3_REGION_NAME',
             'AWS_S3_CUSTOM_DOMAIN',
         ]
         
-        for var in required_vars:
+        for var in required_aws_vars:
             self.assertTrue(
                 hasattr(settings, var),
-                f"Environment variable {var} is not configured"
+                f"AWS setting {var} is not configured"
             )
             self.assertTrue(
                 getattr(settings, var),
-                f"Environment variable {var} is empty"
+                f"AWS setting {var} is empty"
             )
         logger.info("Environment configuration verified successfully")
 
