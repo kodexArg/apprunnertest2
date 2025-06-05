@@ -9,9 +9,8 @@ from botocore.exceptions import ClientError
 logger.remove()
 logger.add(
     sys.stdout,
-    format="<green>{time:YYYY-MM-DD HH:mm:ss}</green> | <level>{level: <8}</level> | <cyan>{name}</cyan>:<cyan>{function}</cyan>:<cyan>{line}</cyan> - <level>{message}</level>",
-    level="INFO",
-    colorize=True
+    format="[{level: <8}] {name}:{function}:{line} - {message}",
+    level="INFO"
 )
 
 class IntegrationTests(TestCase):

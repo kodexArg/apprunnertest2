@@ -9,13 +9,12 @@ from botocore.exceptions import ClientError
 logger.remove()
 logger.add(
     sys.stdout,
-    format="<green>{time:YYYY-MM-DD HH:mm:ss}</green> | <level>{level: <8}</level> | <cyan>{name}</cyan>:<cyan>{function}</cyan>:<cyan>{line}</cyan> - <level>{message}</level>",
-    level="INFO",
-    colorize=True
+    format="[{level: <8}] {name}:{function}:{line} - {message}",
+    level="INFO"
 )
 logger.add(
     f"s3://{settings.AWS_STORAGE_BUCKET_NAME}/logs/tests_{datetime.now().strftime('%Y-%m-%d')}.log",
-    format="{time:YYYY-MM-DD HH:mm:ss} | {level: <8} | {name}:{function}:{line} - {message}",
+    format="[{level: <8}] {name}:{function}:{line} - {message}",
     level="DEBUG",
     rotation="1 day",
     retention="30 days",
