@@ -67,16 +67,29 @@ class IntegrationTests(TestCase):
         test_filename = "test_static_file.txt"
         
         try:
+            # Log storage configuration
+            logger.info(f"Using bucket: {settings.AWS_STORAGE_BUCKET_NAME}")
+            logger.info(f"Using region: {settings.AWS_S3_REGION_NAME}")
+            
             # Try to save a file
+            logger.info("Attempting to save file...")
             storage.save(test_filename, test_content)
+            
             # Try to read it back
+            logger.info("Attempting to read file...")
             with storage.open(test_filename) as f:
                 content = f.read()
                 self.assertEqual(content, test_content)
+            
             # Clean up
+            logger.info("Attempting to delete file...")
             storage.delete(test_filename)
             logger.info("Static files storage test successful")
         except Exception as e:
+            logger.error(f"Storage test failed with error: {str(e)}")
+            logger.error(f"Error type: {type(e).__name__}")
+            if hasattr(e, 'response'):
+                logger.error(f"AWS Response: {e.response}")
             self.fail(f"Static files storage test failed: {str(e)}")
 
     def tearDown(self):
