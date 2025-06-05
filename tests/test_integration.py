@@ -61,8 +61,9 @@ class IntegrationTests(TestCase):
     def test_static_files_storage(self):
         """Verifies S3 static file storage by saving and retrieving a test file."""
         logger.info("Testing static files storage")
-        from django.core.files.storage import get_storage_class
-        storage = get_storage_class('storages.backends.s3.S3Storage')()
+        # from django.core.files.storage import get_storage_class
+        from storages.backends.s3boto3 import S3Boto3Storage
+        storage = S3Boto3Storage()
         test_content = b"Test content for static file storage"
         test_filename = "test_static_file.txt"
         
