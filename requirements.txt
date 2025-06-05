@@ -7,3 +7,6 @@ gunicorn
 boto3
 psycopg2-binary
 django-storages
+loguru
+pytest
+pytest-django

@@ -1,6 +1,30 @@
 from pathlib import Path
 import os
 import json
+from loguru import logger
+import sys
+from datetime import datetime
+
+# Configuración de Loguru
+LOGURU_CONFIG = {
+    "handlers": [
+        {
+            "sink": sys.stdout,
+            "format": "<green>{time:YYYY-MM-DD HH:mm:ss}</green> | <level>{level: <8}</level> | <cyan>{name}</cyan>:<cyan>{function}</cyan>:<cyan>{line}</cyan> - <level>{message}</level>",
+            "level": "INFO",
+        },
+        {
+            "sink": f"s3://{os.environ['AWS_STORAGE_BUCKET_NAME']}/logs/app_{datetime.now().strftime('%Y-%m-%d')}.log",
+            "format": "{time:YYYY-MM-DD HH:mm:ss} | {level: <8} | {name}:{function}:{line} - {message}",
+            "level": "DEBUG",
+            "rotation": "1 day",
+            "retention": "30 days",
+        }
+    ]
+}
+
+# Configurar Loguru
+logger.configure(**LOGURU_CONFIG)
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
