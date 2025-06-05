@@ -1,15 +1,19 @@
 from django.http import HttpResponse
 import os
 from django.db import connection
+from django.shortcuts import render
+from django.http import JsonResponse
 
-def hello_world(request):
-    ping_value = os.environ.get('PING', 'NO_SECRET')
-    return HttpResponse(f'Hello World - PING: {ping_value}')
+def home(request):
+    return render(request, 'core/home.html')
+
+def health(request):
+    return JsonResponse({'status': 'ok'}, status=200)
 
 def db_health_check(request):
     try:
         with connection.cursor() as cursor:
             cursor.execute("SELECT 1")
-            return HttpResponse("Database connection successful", status=200)
+            return JsonResponse({'status': 'ok'}, status=200)
     except Exception as e:
-        return HttpResponse(f"Database connection failed: {str(e)}", status=500)
+        return JsonResponse({'status': 'error', 'message': str(e)}, status=500)

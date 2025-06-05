@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Core Home {% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Core Home (testing area)</h1>
+    <div class="health-links">
+        <h2>Health Check Endpoints</h2>
+        <ul>
+            <li><a href="{% url 'db_health_check' %}">Database Health Check</a></li>
+        </ul>
+    </div>
+</div>
+{% endblock %} 
