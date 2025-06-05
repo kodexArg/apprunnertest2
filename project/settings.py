@@ -163,6 +163,3 @@ MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/media/'
 
 # Test Runner Configuration
 TEST_RUNNER = 'django.test.runner.DiscoverRunner'
-TEST_DISCOVER_TOP_LEVEL = os.path.dirname(BASE_DIR)
-TEST_DISCOVER_ROOT = os.path.dirname(BASE_DIR)
-TEST_DISCOVER_PATTERN = "test_*.py"
