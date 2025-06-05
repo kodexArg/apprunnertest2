@@ -2,6 +2,12 @@
 
 set -e  # Stop script if any error occurs
 
+# --- Eliminar base de datos de test si existe ---
+echo "Checking and dropping test database if exists..."
+export PGPASSWORD="$DB_PASSWORD"
+psql -h "$DB_HOST" -U "$DB_USERNAME" -p "$DB_PORT" -d postgres -c "DROP DATABASE IF EXISTS test_$DB_NAME;" || true
+unset PGPASSWORD
+
 echo "Running Django migrations..."
 .venv/bin/python manage.py makemigrations
 .venv/bin/python manage.py migrate
