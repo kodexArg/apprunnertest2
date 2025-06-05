@@ -61,19 +61,20 @@ class IntegrationTests(TestCase):
     def test_static_files_storage(self):
         """Verifies S3 static file storage by saving and retrieving a test file."""
         logger.info("Testing static files storage")
-        from django.core.files.storage import default_storage
+        from django.core.files.storage import get_storage_class
+        storage = get_storage_class('storages.backends.s3.S3Storage')()
         test_content = b"Test content for static file storage"
         test_filename = "test_static_file.txt"
         
         try:
             # Try to save a file
-            default_storage.save(test_filename, test_content)
+            storage.save(test_filename, test_content)
             # Try to read it back
-            with default_storage.open(test_filename) as f:
+            with storage.open(test_filename) as f:
                 content = f.read()
                 self.assertEqual(content, test_content)
             # Clean up
-            default_storage.delete(test_filename)
+            storage.delete(test_filename)
             logger.info("Static files storage test successful")
         except Exception as e:
             self.fail(f"Static files storage test failed: {str(e)}")
