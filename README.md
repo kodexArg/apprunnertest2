@@ -12,9 +12,9 @@ Test project for AWS App Runner with Python 3.11 (without Docker/ECS).
 - [x] Gunicorn as WSGI server
 - [x] Secrets Manager integration (PING test)
 - [x] RDS integration
-- [ ] S3 integration
-  - [ ] CloudFront
-- [ ] S3 write tests
+- [x] S3 integration
+  - [x] CloudFront
+- [x] S3 write tests
 
 ## 📝 Notes
 
@@ -26,6 +26,9 @@ Test project for AWS App Runner with Python 3.11 (without Docker/ECS).
 - Environment variables set
 - Automated startup script with uv and Gunicorn
 - Migrations and superuser created automatically
+- **Explicit and detailed test suite:**
+  - S3 integration and write tests implemented and passing
+  - Application tests for views and models are run explicitly and provide detailed logs
 
 ## 4. Ejecución explícita y detallada de tests
 
