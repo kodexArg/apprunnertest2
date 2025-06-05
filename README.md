@@ -2,6 +2,7 @@
 
 Test project for AWS App Runner with Python 3.11 (without Docker/ECS).
 
+
 ## 📋 Implementation Order
 
 ### 1. Core Infrastructure
@@ -10,6 +11,11 @@ Test project for AWS App Runner with Python 3.11 (without Docker/ECS).
 - [x] Environment variables in apprunner.yaml (SECRET_KEY, ALLOWED_HOSTS, DEBUG)
 - [x] Using uv for dependency management
 - [x] Gunicorn as WSGI server
+- [ ] Local development environment setup
+  - [ ] Development settings configuration
+  - [ ] Local database setup
+  - [ ] Local S3 emulation
+  - [ ] Development scripts and tools
 
 ### 2. AWS Services Integration
 - [x] Secrets Manager integration (PING test)
@@ -22,9 +28,28 @@ Test project for AWS App Runner with Python 3.11 (without Docker/ECS).
 - [x] Template structure and organization
   - [x] Common `/templates` directory
   - [x] App-specific templates
-- [ ] Frontend and API
-  - [ ] Generic API structure
-- [ ] Django Vite integration
+- [ ] User Structure
+  - [ ] Authentication System
+    - [ ] Login/Logout views
+    - [ ] Password reset flow
+  - [ ] Testing
+- [ ] API Structure
+  - [ ] Design and Implementation
+    - [ ] Set up authentication
+    - [ ] Create core endpoints
+  - [ ] Testing
+
+### 4. Frontend
+- [ ] Setup Frontend Stack
+  - [ ] Django-components
+  - [ ] Vite
+  - [ ] Tailwind
+  - [ ] HTMX
+- [ ] Custom Components Library for this project
+  - [ ] Base components / Templates
+    - [ ] Include HTMX strategy
+  - [ ] Build and test core components
+
 
 ## 📝 Notes
 
@@ -36,6 +61,21 @@ Test project for AWS App Runner with Python 3.11 (without Docker/ECS).
 - **Explicit and detailed test suite:**
   - S3 integration and write tests implemented and passing
   - Application tests for views and models are run explicitly and provide detailed logs
+- **Frontend Implementation Notes:**
+  - Modern stack: Vite + Tailwind + HTMX + Components
+  - Progressive enhancement approach
+  - Static assets served through CloudFront
+  - Build process integrated with AppRunner deployment
+- **API Implementation Notes:**
+  - RESTful design principles
+  - JWT-based authentication
+  - Rate limiting and caching
+  - Comprehensive test coverage
+- **User System Notes:**
+  - Django's built-in authentication
+  - Custom user model for extensibility
+  - Secure password handling
+  - Session management
 
 
 ## License
