@@ -5,6 +5,7 @@ import sys
 from datetime import datetime
 import boto3
 from botocore.exceptions import ClientError
+from django.core.files.base import ContentFile
 
 logger.remove()
 logger.add(
@@ -65,6 +66,7 @@ class IntegrationTests(TestCase):
         from storages.backends.s3boto3 import S3Boto3Storage
         storage = S3Boto3Storage()
         test_content = b"Test content for static file storage"
+        content_file = ContentFile(test_content)
         test_filename = "test_static_file.txt"
         
         try:
@@ -74,7 +76,7 @@ class IntegrationTests(TestCase):
             
             # Try to save a file
             logger.info("Attempting to save file...")
-            storage.save(test_filename, test_content)
+            storage.save(test_filename, content_file)
             
             # Try to read it back
             logger.info("Attempting to read file...")
